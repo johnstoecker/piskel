@@ -6,9 +6,21 @@
       template : 'templates/dialogs/cheatsheet.html',
       controller : ns.CheatsheetController
     },
+    'map-text' : {
+      template : 'templates/dialogs/map-text.html',
+      controller : ns.MapTextDialogController
+    },
+    'map-label-text' : {
+      template : 'templates/dialogs/map-label-text.html',
+      controller : ns.MapLabelDialogController
+    },
     'create-palette' : {
       template : 'templates/dialogs/create-palette.html',
       controller : ns.CreatePaletteController
+    },
+    'create-legend' : {
+      template : 'templates/dialogs/create-legend.html',
+      controller : ns.CreateLegendController
     },
     'browse-local' : {
       template : 'templates/dialogs/browse-local.html',
@@ -45,12 +57,24 @@
     $.subscribe(Events.DIALOG_SHOW, this.onDialogDisplayEvent_.bind(this));
     $.subscribe(Events.DIALOG_HIDE, this.hideDialog.bind(this));
 
+    // listen for map event tool selection, show popup
+    $.subscribe(Events.TOOL_SELECTED, (function(evt, toolBehavior) {
+      if (toolBehavior.toolId == "tool-map-event") {
+        this.toggleDialog_('map-text');
+      } else if (toolBehavior.toolId == "tool-map-label") {
+        this.toggleDialog_('map-label-text');
+      }
+      // this.currentToolBehavior = toolBehavior;
+      // this.overlayFrame.clear();
+    }).bind(this));
+
     var createPaletteShortcut = pskl.service.keyboard.Shortcuts.COLOR.CREATE_PALETTE;
     pskl.app.shortcutService.registerShortcut(createPaletteShortcut, this.onCreatePaletteShortcut_.bind(this));
 
     var cheatsheetShortcut = pskl.service.keyboard.Shortcuts.MISC.CHEATSHEET;
     pskl.app.shortcutService.registerShortcut(cheatsheetShortcut, this.onCheatsheetShortcut_.bind(this));
     pskl.utils.Event.addEventListener('.cheatsheet-link', 'click', this.onCheatsheetShortcut_, this);
+    // pskl.utils.Event.addEventListener('.icon-tool-map-event', 'click', this.onCheatsheetShortcut_, this);
 
     // adding the .animated class here instead of in the markup to avoid an animation during app startup
     this.dialogWrapper_.classList.add('animated');

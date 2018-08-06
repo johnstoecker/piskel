@@ -1,0 +1,93 @@
+<script type="text/template" id="templates/dialogs/create-legend.html">
+  <div class="dialog-wrapper create-legend-wrapper">
+    <h3 class="dialog-head">
+      <span class="dialog-title">Create Legend</span>
+      <span class="dialog-close">X</span>
+    </h3>
+    <div class="dialog-create-legend" style="font-size:1.3em">
+      <div class="legend-location-anchor-container">
+        <div class="legend-anchor-container"></div>
+        Legend location on the map
+      </div>
+      <div class="create-legends-list-container">
+        <div class="create-legends-list"></div>
+        <div class="create-legend-section form-section">
+          <button type="button" name="add-legend-label" data-action="submit" class="button button-primary add-legend-label">Add another label</button>
+        </div>
+      </div>
+      <div class="create-legend-actions">
+        <button type="button" name="create-legend-cancel" data-action="cancel" class="button create-legend-cancel">Cancel</button>
+        <button type="button" name="create-legend-delete" data-action="delete" class="button button-primary create-legend-delete">Delete</button>
+        <button type="button" name="create-legend-submit" data-action="submit" class="button button-primary create-legend-submit">Save</button>
+      </div>
+    </div>
+    <div class="color-picker-create-legend">
+      <div class="colors-container">
+        <ul class="colors-list"></ul>
+        <div class="color-picker-container">
+          <div class="color-picker-spectrum"></div>
+          <div class="color-picker-input">
+            <input type="text"  data-model="hex" data-dimension="*" class="textfield  uppercase" value="#000000" />
+          </div>
+          <div class="color-picker-slider">
+            <span>H</span>
+            <input type="range" data-model="hsv" data-dimension="h" value="0" min="0" max="359" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="h" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>S</span>
+            <input type="range" data-model="hsv" data-dimension="s" value="0" min="0" max="100" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="s" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>V</span>
+            <input type="range" data-model="hsv" data-dimension="v" value="0" min="0" max="100" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="v" class="textfield" value="0" />
+          </div>
+          <br/>
+          <div class="color-picker-slider">
+            <span>R</span>
+            <input type="range" data-model="rgb" data-dimension="r" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="r" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>G</span>
+            <input type="range" data-model="rgb" data-dimension="g" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="g" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>B</span>
+            <input type="range" data-model="rgb" data-dimension="b" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="b" class="textfield" value="0" />
+          </div>
+          <div class="color-preview"></div>
+        </div>
+      </div>
+      <div class="create-legend-actions">
+        <button type="button" name="create-legend-color-cancel" data-action="cancel" class="button create-legend-color-cancel">Back</button>
+        <button type="button" name="create-legend-color-choose" data-action="choose" class="button create-legend-color-choose">Choose Color</button>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="create-legend-new-color-template">
+  <div class="create-legend-section form-section">
+    <li class="create-palette-new-color">+</li>
+    <input type="text" class="textfield create-legend-name-input" name="legend-name" placeholder="Kingdom of Gondor"/>
+    <button type="button" name="create-legend-remove-label" data-action="remove" class="button create-legend-remove-label">Remove</button>
+  </div>'
+</script>
+
+<script type="text/template" id="create-legend-color-template">
+  <div class="create-legend-section form-section">
+    <li
+      class="create-palette-color"
+      style="background:{{color}}"
+      data-palette-color="{{color}}">
+      <div class="create-palette-remove-color"></div>
+    </li>
+    <input type="text" class="textfield create-legend-name-input" name="legend-name" placeholder="The Shire" value="{{label}}"/>
+    <button type="button" name="create-legend-remove-label" data-action="remove" class="button create-legend-remove-label">Remove</button>
+  </div>
+</script>

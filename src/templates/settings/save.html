@@ -1,7 +1,7 @@
 <script type="text/template" id="templates/settings/save.html">
   <div class="settings-section settings-section-save">
     <form action="" method="POST" class="save-form" name="save-form">
-      <div class="settings-title">Sprite Information</div>
+      <div class="settings-title">Map Information</div>
       <div class="settings-item">
         <div class="settings-form-section" style="overflow:hidden">
           <label class="row" style="line-height:20px;">Title : </label>
@@ -12,9 +12,10 @@
           <textarea id="save-description" class="save-field textfield"></textarea>
         </div>
         <div class="settings-form-section  save-public-section">
-          <label class="row">
+          <!-- TODO: allow private maps -->
+          <!-- <label class="row">
             Public : <input type="checkbox" value="1" name="save-public-checkbox"/>
-          </label>
+          </label> -->
         </div>
       </div>
     </form>
@@ -26,7 +27,7 @@
   <div class="settings-title">Save online</div>
   <div class="settings-item">
     <input type="button" class="button button-primary" id="save-gallery-button" value="Save to your gallery" />
-    <div class="save-status save-online-status">Your piskel will be stored online in your gallery.</div>
+    <div class="save-status save-online-status">Your map will be stored online.</div>
   </div>
 </script>
 
@@ -39,7 +40,8 @@
 <script type="text/template" id="save-gallery-unavailable-partial">
   <div class="settings-title">Save online</div>
   <div class="settings-item">
-    <div class="save-status">Login to <a href="https://www.piskelapp.com" target="_blank">piskelapp.com</a> to save and share your sprites online.</div>
+    <!-- TODO: https -->
+    <div class="save-status">Login to <a href="http://www.ironmaps.com" target="_blank">ironmaps.com</a> to save and share your maps online.</div>
   </div>
 </script>
 

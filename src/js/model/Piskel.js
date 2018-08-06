@@ -11,11 +11,13 @@
   ns.Piskel = function (width, height, fps, descriptor) {
     if (width && height && descriptor) {
       this.layers = [];
+      this.legend = null;
       this.width = width;
       this.height = height;
       this.descriptor = descriptor;
       this.savePath = null;
       this.fps = fps;
+      this.mapId = null;
     } else {
       throw 'Missing arguments in Piskel constructor : ' + Array.prototype.join.call(arguments, ',');
     }
@@ -55,6 +57,31 @@
     return this.fps;
   };
 
+  ns.Piskel.prototype.setEvents = function (events) {
+    // TODO: probably will crap out on deleted layers??
+    for (var i in Object.keys(events)) {
+      var frame = this.layers[0].frames[i];
+      var mapEvent = events[i];
+      frame.setMapEvent(mapEvent);
+    }
+  }
+
+  // grab event from each frame, extract to an array
+  ns.Piskel.prototype.getEvents = function () {
+    var events = {}
+    // combine all Map events on all layers? take the one that exists
+    // TODO: get layer switching correct, add map event to other frames on layer
+    for (var l in this.layers) {
+      for (var i in this.layers[l].frames) {
+        var frame = this.layers[l].frames[i];
+        if (frame.mapEvent && frame.mapEvent.text) {
+          events[i] = frame.mapEvent;
+        }
+      }
+    }
+    return events
+  }
+
   ns.Piskel.prototype.getLayers = function () {
     return this.layers;
   };
@@ -76,6 +103,10 @@
   ns.Piskel.prototype.addLayer = function (layer) {
     this.layers.push(layer);
   };
+
+  ns.Piskel.prototype.setLegend = function (legend) {
+    this.legend = legend;
+  }
 
   ns.Piskel.prototype.addLayerAt = function (layer, index) {
     this.layers.splice(index, 0, layer);

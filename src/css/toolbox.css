@@ -42,3 +42,22 @@
 .toolbox-buttons button:last-child {
   border-right-width: 0;
 }
+
+.map-event-text-mini-title {
+  /* padding: 8px; */
+  margin: 0;
+  font-size: 15px;
+  background: #eee;
+  text-align: left;
+  /* reset for firefox */
+  height: 16px;
+  /* background: #222; */
+}
+
+.legend-container {
+  min-height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 10px;
+}

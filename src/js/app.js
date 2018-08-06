@@ -10,6 +10,8 @@
   ns.app = {
 
     init : function () {
+      this.initLogin_();
+
       // Run preferences migration scripts for version v0.12.0
       pskl.UserSettings.migrate_to_v0_12();
 
@@ -26,7 +28,7 @@
 
       var size = pskl.UserSettings.get(pskl.UserSettings.DEFAULT_SIZE);
       var fps = Constants.DEFAULT.FPS;
-      var descriptor = new pskl.model.piskel.Descriptor('New Piskel', '');
+      var descriptor = new pskl.model.piskel.Descriptor('New Map', '');
       var piskel = new pskl.model.Piskel(size.width, size.height, fps, descriptor);
 
       var layer = new pskl.model.Layer('Layer 1');
@@ -61,6 +63,9 @@
 
       this.palettesListController = new pskl.controller.PalettesListController(this.currentColorsService);
       this.palettesListController.init();
+
+      this.legendController = new pskl.controller.LegendController(this.currentColorsService);
+      this.legendController.init();
 
       this.cursorCoordinatesController = new pskl.controller.CursorCoordinatesController(this.piskelController);
       this.cursorCoordinatesController.init();
@@ -183,9 +188,9 @@
 
       this.initTooltips_();
 
-      var piskelData = this.getPiskelInitData_();
-      if (piskelData && piskelData.piskel) {
-        this.loadPiskel_(piskelData);
+      var mapId = this.getPiskelInitData_();
+      if (mapId) {
+        this.loadMap_(mapId);
       }
 
       if (pskl.devtools) {
@@ -211,6 +216,55 @@
       }
     },
 
+    loadMapImage_ : function (mapData) {
+      var requestUrl = "https://s3-us-west-2.amazonaws.com/map-content-images/" + mapData.imageURL
+
+      var image = new Image();
+      image.onload = function () {
+        pskl.app.importService.newPiskelFromImage(
+          image,
+          {
+            importType:'single',
+            frameSizeX: 32,
+            frameSizeY: 32,
+            frameOffsetX: 0,
+            frameOffsetY: 0,
+            smoothing: false,
+            name: mapData.Title
+          },
+          function(piskel) {
+            var descriptor =  new pskl.model.piskel.Descriptor(mapData.Title, mapData.Description, mapData.IsPublic);
+            piskel.setDescriptor(descriptor);
+            piskel.setLegend(mapData.Legend);
+            piskel.setEvents(mapData.Events);
+            piskel.mapId = mapData.MapId;
+            pskl.app.piskelController.setPiskel(piskel);
+            $.publish(Events.PISKEL_SAVED);
+          }
+        );
+
+      }.bind(this);
+      image.src = requestUrl;
+    },
+
+    loadMap_ : function (mapId) {
+      var callback = this.loadMapImage_
+      $.ajax({
+          method: 'GET',
+          url: "https://k0r6hekc1k.execute-api.us-west-2.amazonaws.com/prod/maps/" + mapId,
+          // TODO: edit private maps
+          // headers: {
+          //     Authorization: authToken
+          // },
+          success: callback,
+          error: function ajaxError(jqXHR, textStatus, errorThrown) {
+              console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+              console.error('Response: ', jqXHR.responseText);
+              alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
+          }
+      });
+    },
+
     loadPiskel_ : function (piskelData) {
       var serializedPiskel = piskelData.piskel;
       pskl.utils.serialization.Deserializer.deserialize(serializedPiskel, function (piskel) {
@@ -223,13 +277,45 @@
       });
     },
 
+    initLogin_ : function () {
+      var IronMaps = window.IronMaps || {};
+      IronMaps.map = IronMaps.map || {};
+
+      var authToken;
+      IronMaps.authToken.then(function setAuthToken(token) {
+          if (token) {
+              this.authToken = token;
+          } else {
+              console.log("you arent logged in, thats probably fine, eh")
+              // not logged in
+              // window.location.href = '/signin.html';
+          }
+      }).catch(function handleTokenError(error) {
+          alert(error);
+          window.location.href = '/signin.html';
+      });
+    },
+
+    getParameterByName_ : function (name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },
+
     getPiskelInitData_ : function () {
-      return pskl.appEnginePiskelData_;
+      var mapId = this.getParameterByName_("id", window.location.search)
+      console.log(mapId)
+      return mapId;
     },
 
     isLoggedIn : function () {
-      var piskelData = this.getPiskelInitData_();
-      return piskelData && piskelData.isLoggedIn;
+      return this.authToken && true;
+      // var piskelData = this.getPiskelInitData_();
+      // return piskelData && piskelData.isLoggedIn;
     },
 
     initTooltips_ : function () {
@@ -262,4 +348,3 @@
     }
   };
 })();
-

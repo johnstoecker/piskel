@@ -94,6 +94,10 @@
   transition: 0.3s opacity, 0.3s border-color;
 }
 
+.minimap-container {
+  position: relative;
+}
+
 .minimap-container:hover .preview-contextual-actions {
   opacity: 1;
 }

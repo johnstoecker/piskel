@@ -1,0 +1,31 @@
+<script type="text/template" id="templates/dialogs/map-label-text.html">
+  <div id="mapLabelTextDialogContainer" class="dialog-wrapper map-label-text-dialog-wrapper">
+    <h3 class="dialog-head map-label-text-dialog-head">
+      <span class="dialog-title">Add Labels</span>
+      <span class="dialog-close">X</span>
+    </h3>
+    <div class="map-labels-container">
+      <div class="map-label-full-container">
+        <div class="map-label-top-container">
+          <input type="text" placeholder="Map Label" id="map-label-text-editable-container" class="map-label-text-editable-container"></input>
+          <form>
+            <!-- TODO: allow single-frame labels -->
+            <!-- <input type="radio" name="this-frame-only" value="this-frame-only" checked>This frame only<br>
+            <input type="radio" name="all-frames" value="all-frames">All Frames<br> -->
+          </form>
+        </div>
+        <!-- TODO: -->
+        <div class="map-label-text-location-info">Location:
+          <span id="map-label-text-location-data" class="map-text-location-data"></span>
+          <button id="map-label-text-location-remove">Delete</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="map-text-dialog-content-container">
+    </div> -->
+    <div class="map-label-text-actions">
+      <span class="cheatsheet-helptext"><b>e.g. <span class="map-label-text-dialog-help-color">Carthage</span> or <span class="map-text-dialog-help-color">Mines of Moria</span></b></span>
+      <button type="button" name="map-label-text-dialog-save" data-action="map-label-text-dialog-save" class="button cheatsheet-button map-label-text-dialog-save">Save</button>
+    </div>
+  </div>
+</script>

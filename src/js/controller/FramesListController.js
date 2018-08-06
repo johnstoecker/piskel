@@ -206,6 +206,7 @@
    * @private
    */
   ns.FramesListController.prototype.onUpdate_ = function (event, ui) {
+    console.log('updated')
     var movedItem = ui.item.get(0);
     var originFrameId = parseInt(movedItem.dataset.tileNumber, 10);
     var tiles = document.querySelectorAll('.preview-tile');

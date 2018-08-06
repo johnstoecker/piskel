@@ -289,6 +289,7 @@
     this.updateMargins_(frame);
 
     var displayContext = this.displayCanvas.getContext('2d');
+
     displayContext.save();
 
     var translateX = this.margin.x - this.offset.x * z;
@@ -307,6 +308,10 @@
       // of a canvas. (https://bugs.chromium.org/p/chromium/issues/detail?id=469906)
       displayContext.fillRect(0, 0, this.displayCanvas.width - 1, this.displayCanvas.height - 1);
     }
+    // TODO: in case we want to render the text above the map
+    // displayContext.font = "30px Arial";
+    // displayContext.fillStyle = "red";
+    // displayContext.fillText("Hello World",20,20);
 
     displayContext.translate(translateX, translateY);
 

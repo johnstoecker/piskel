@@ -3,7 +3,7 @@ var Constants = {
   DEFAULT : {
     HEIGHT : 32,
     WIDTH : 32,
-    FPS : 12,
+    FPS : 0,
     LAYER_OPACITY : 0.2
   },
 
@@ -64,7 +64,7 @@ var Constants = {
   CONFIRM_OVERWRITE: 'This will replace your current animation, are you sure you want to continue?',
 
   // SERVICE URLS
-  APPENGINE_SAVE_URL : 'save',
+  APPENGINE_SAVE_URL : 'maps',
   IMAGE_SERVICE_UPLOAD_URL : '{{protocol}}://piskel-imgstore-b.appspot.com/__/upload',
   IMAGE_SERVICE_GET_URL : '{{protocol}}://piskel-imgstore-b.appspot.com/img/'
 };

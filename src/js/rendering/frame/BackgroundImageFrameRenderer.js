@@ -8,6 +8,7 @@
     var containerDocument = container.ownerDocument;
     this.frameContainer = containerDocument.createElement('div');
     this.frameContainer.classList.add('background-image-frame-container');
+    this.mapEventTextMiniTitle = $('#map-event-text-mini-title');
     container.appendChild(this.frameContainer);
 
     this.cachedFrameProcessor = new pskl.model.frame.CachedFrameProcessor();
@@ -25,6 +26,7 @@
   };
 
   ns.BackgroundImageFrameRenderer.prototype.render = function (frame) {
+    this.mapEventTextMiniTitle.text(frame.mapEvent.text || "")
     var imageSrc = this.cachedFrameProcessor.get(frame, this.zoom);
     this.frameContainer.style.backgroundImage = 'url(' + imageSrc + ')';
   };

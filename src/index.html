@@ -42,10 +42,12 @@
       </div>
 
       <div class="column right-column">
+        @@include('templates/map-event-text-mini.html')
         @@include('templates/preview.html', {})
         @@include('templates/layers-list.html', {})
         @@include('templates/transformations.html', {})
         @@include('templates/palettes-list.html', {})
+        @@include('templates/create-legend.html', {})
         <div class="pull-bottom cursor-coordinates"></div>
       </div>
     </div>
@@ -79,7 +81,10 @@
   @@include('templates/dialogs/browse-backups.html', {})
   @@include('templates/dialogs/browse-local.html', {})
   @@include('templates/dialogs/cheatsheet.html', {})
+  @@include('templates/dialogs/map-text.html', {})
+  @@include('templates/dialogs/map-label-text.html', {})
   @@include('templates/dialogs/create-palette.html', {})
+  @@include('templates/dialogs/create-legend.html', {})
   @@include('templates/dialogs/import.html', {})
   @@include('templates/dialogs/performance-info.html', {})
   @@include('templates/dialogs/unsupported-browser.html', {})

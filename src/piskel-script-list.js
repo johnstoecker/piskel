@@ -11,6 +11,12 @@
   "js/Constants.js",
   "js/Events.js",
 
+  // Auth
+  "js/auth/aws-cognito-sdk.min.js",
+  "js/auth/amazon-cognito-identity.min.js",
+  "js/auth/config.js",
+  "js/auth/cognito-auth.js",
+
   // Libraries
   "js/utils/core.js",
   "js/utils/UserAgent.js",
@@ -118,6 +124,7 @@
   "js/controller/ToolController.js",
   "js/controller/PaletteController.js",
   "js/controller/PalettesListController.js",
+  "js/controller/LegendController.js",
   "js/controller/PenSizeController.js",
   "js/controller/ProgressBarController.js",
   "js/controller/NotificationController.js",
@@ -147,8 +154,11 @@
   // Dialogs sub-controllers
   "js/controller/dialogs/AbstractDialogController.js",
   "js/controller/dialogs/CreatePaletteController.js",
+  "js/controller/dialogs/CreateLegendController.js",
   "js/controller/dialogs/BrowseLocalController.js",
   "js/controller/dialogs/CheatsheetController.js",
+  "js/controller/dialogs/MapTextDialogController.js",
+  "js/controller/dialogs/MapLabelDialogController.js",
   "js/controller/dialogs/backups/steps/SelectSession.js",
   "js/controller/dialogs/backups/steps/SessionDetails.js",
   "js/controller/dialogs/backups/BrowseBackups.js",
@@ -235,6 +245,8 @@
   "js/tools/drawing/ColorPicker.js",
   "js/tools/drawing/ColorSwap.js",
   "js/tools/drawing/DitheringTool.js",
+  "js/tools/drawing/MapEvent.js",
+  "js/tools/drawing/MapLabel.js",
   "js/tools/transform/AbstractTransformTool.js",
   "js/tools/transform/Center.js",
   "js/tools/transform/Clone.js",

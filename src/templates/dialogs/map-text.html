@@ -1,0 +1,33 @@
+<script type="text/template" id="templates/dialogs/map-text.html">
+  <div id="mapTextDialogContainer" class="dialog-wrapper map-text-dialog-wrapper">
+    <h3 class="dialog-head map-text-dialog-head">
+      <span class="dialog-title">Add Narration Text</span>
+      <span class="dialog-close">X</span>
+    </h3>
+    <textarea id="map-text-editable-container" class="map-text-editable-container" contenteditable="true"></textarea>
+    <!-- TODO: -->
+    <div class="map-text-location-info">Current Location:
+      <span id="map-text-location-data" class="map-text-location-data"></span>
+      <button id="map-text-location-remove">Remove location</button>
+    </div>
+    <!-- <div class="map-text-dialog-content-container">
+    </div> -->
+    <div class="map-event-actions">
+      <span class="cheatsheet-helptext"><b>e.g. <span class="map-text-dialog-help-color">Rome Founded, 753 BC</span> or <span class="map-text-dialog-help-color">Frodo Leaves the Shire, 3001</span></b></span>
+      <button type="button" name="map-text-dialog-save" data-action="map-text-dialog-save" class="button cheatsheet-button map-text-dialog-save">Save</button>
+    </div>
+
+    <!-- Event trap to capture keyboard remaps -->
+    <!-- <div style="position:relative; overflow:hidden; width:1px; height:1px;">
+      <input type="text" id="cheatsheetEventTrap" style="position:absolute; top:-1000px;" />
+    </div> -->
+  </div>
+</script>
+
+<!-- <script type="text/template" id="cheatsheet-shortcut-template">
+  <li class="cheatsheet-shortcut {{className}}" data-shortcut-id="{{id}}">
+    <div class="cheatsheet-icon {{icon}}"></div>
+    <span class="cheatsheet-key" rel="tooltip" data-placement="top" title="{{title}}">{{!key!}}</span>
+    <span class="cheatsheet-description">{{description}}</span>
+  </li>
+</script> -->

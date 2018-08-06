@@ -31,7 +31,9 @@
       LASSO_SELECT : createShortcut('tool-lasso-select', 'Lasso selection', 'H'),
       LIGHTEN : createShortcut('tool-lighten', 'Lighten tool', 'U'),
       DITHERING : createShortcut('tool-dithering', 'Dithering tool', 'T'),
-      COLORPICKER : createShortcut('tool-colorpicker', 'Color picker', 'O')
+      COLORPICKER : createShortcut('tool-colorpicker', 'Color picker', 'O'),
+      MAP_EVENT : createShortcut('tool-map-event', 'Map Event', 'Q'),
+      MAP_LABEL : createShortcut('tool-map-label', 'Map Label', 'W')
     },
 
     SELECTION : {

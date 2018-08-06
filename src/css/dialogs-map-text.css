@@ -1,0 +1,42 @@
+#dialog-container.map-text {
+  width: 500px;
+  height: 200px;
+  top : 30%;
+  left : 50%;
+  position : absolute;
+  margin-left: -250px;
+}
+
+.map-text-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-text-dialog-head {
+  flex: 0 0 auto;
+  background-color: #ffd700;
+
+}
+
+.map-text-editable-container {
+  flex: 1 0 auto;
+  /* height: 100vh;
+  width: 100vh; */
+  /* height: 100%;
+  width: 100%; */
+  font-size: 20px;
+}
+
+.map-text-location-info {
+  flex: 1 0 auto;
+}
+
+.map-event-actions {
+  flex: 0 0 30px;
+  padding: 10px;
+  background-color: #ffd700;
+}
+
+.map-text-dialog-help-color {
+  color: #FF3333;
+}

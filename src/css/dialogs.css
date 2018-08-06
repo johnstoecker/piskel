@@ -20,6 +20,10 @@
   color: white;
 }
 
+#dialog-container-wrapper.mini-dialog {
+  position: inherit;
+}
+
 #dialog-container-wrapper.animated {
   transition: opacity 0.2s;
 }

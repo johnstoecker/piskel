@@ -18,7 +18,10 @@
       new pskl.tools.drawing.selection.LassoSelect(),
       new pskl.tools.drawing.Lighten(),
       new pskl.tools.drawing.DitheringTool(),
-      new pskl.tools.drawing.ColorPicker()
+      new pskl.tools.drawing.ColorPicker(),
+      new pskl.tools.drawing.MapEvent()
+      // TODO: add map label
+      // new pskl.tools.drawing.MapLabel()
     ];
 
     this.toolIconBuilder = new pskl.tools.ToolIconBuilder();

@@ -6,6 +6,8 @@
       this.width = width;
       this.height = height;
       this.id = __idCounter++;
+      this.mapEvent = {};
+      this.mapLabels = [];
       this.version = 0;
       this.pixels = ns.Frame.createEmptyPixelGrid_(width, height);
       this.stateIndex = 0;
@@ -71,6 +73,7 @@
   ns.Frame.prototype.clone = function () {
     var clone = new ns.Frame(this.width, this.height);
     clone.setPixels(this.pixels);
+    clone.setMapEvent(this.mapEvent);
     return clone;
   };
 
@@ -88,6 +91,31 @@
     this.pixels = this.clonePixels_(pixels);
     this.version++;
   };
+
+  /**
+   * Copies the map Event into the frame
+   */
+  ns.Frame.prototype.setMapEvent = function (event) {
+    if (event.text) {
+      this.mapEvent.text = event.text;
+    }
+    if (event.location) {
+      this.mapEvent.location = event.location;
+    }
+  }
+
+  ns.Frame.prototype.setMapEventText = function (text) {
+    console.log("setting map event text")
+    this.mapEvent.text = text;
+  }
+
+  ns.Frame.prototype.setMapEventLocation = function (location) {
+    this.mapEvent.location = location;
+  }
+
+  ns.Frame.prototype.setCurrentMapLabelLocation = function (location) {
+
+  }
 
   ns.Frame.prototype.clear = function () {
     this.pixels = ns.Frame.createEmptyPixelGrid_(this.getWidth(), this.getHeight());

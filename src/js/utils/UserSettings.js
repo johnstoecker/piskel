@@ -38,7 +38,7 @@
       'SELECTED_PALETTE' : Constants.CURRENT_COLORS_PALETTE_ID,
       'SEAMLESS_OPACITY' : 0.30,
       'SEAMLESS_MODE' : false,
-      'PREVIEW_SIZE' : 'original',
+      'PREVIEW_SIZE' : 'full',
       'ONION_SKIN' : false,
       'LAYER_OPACITY' : 0.2,
       'LAYER_PREVIEW' : true,
