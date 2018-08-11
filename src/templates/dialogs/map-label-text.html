@@ -1,31 +1,124 @@
 <script type="text/template" id="templates/dialogs/map-label-text.html">
-  <div id="mapLabelTextDialogContainer" class="dialog-wrapper map-label-text-dialog-wrapper">
-    <h3 class="dialog-head map-label-text-dialog-head">
-      <span class="dialog-title">Add Labels</span>
+  <div id="mapLabelTextDialogContainer" class="dialog-wrapper create-map-label-wrapper">
+    <h3 class="dialog-head">
+      <span class="dialog-title">Create Labels</span>
       <span class="dialog-close">X</span>
     </h3>
-    <div class="map-labels-container">
-      <div class="map-label-full-container">
-        <div class="map-label-top-container">
-          <input type="text" placeholder="Map Label" id="map-label-text-editable-container" class="map-label-text-editable-container"></input>
-          <form>
-            <!-- TODO: allow single-frame labels -->
-            <!-- <input type="radio" name="this-frame-only" value="this-frame-only" checked>This frame only<br>
-            <input type="radio" name="all-frames" value="all-frames">All Frames<br> -->
-          </form>
-        </div>
-        <!-- TODO: -->
-        <div class="map-label-text-location-info">Location:
-          <span id="map-label-text-location-data" class="map-text-location-data"></span>
-          <button id="map-label-text-location-remove">Delete</button>
+    <div class="dialog-create-legend" style="font-size:1.3em">
+      <!-- <div class="legend-location-anchor-container">
+        <div class="legend-anchor-container"></div>
+        Legend location on the map
+      </div> -->
+      <div class="create-map-labels-list-container">
+        <div class="create-map-labels-list"></div>
+        <div class="create-map-label-section form-section">
+          <button type="button" name="add-map-label-label" data-action="submit" class="button button-primary add-map-label-label">Add another label</button>
         </div>
       </div>
+      <div class="create-map-label-actions">
+        <span class="cheatsheet-helptext"><b>e.g. <span class="map-label-text-dialog-help-color">Carthage</span> or <span class="map-text-dialog-help-color">Mines of Moria</span></b></span>
+        <button type="button" name="create-map-label-cancel" data-action="cancel" class="button create-map-label-cancel">Cancel</button>
+        <button type="button" name="create-map-label-submit" data-action="submit" class="button button-primary create-map-label-submit">Save</button>
+      </div>
     </div>
-    <!-- <div class="map-text-dialog-content-container">
-    </div> -->
-    <div class="map-label-text-actions">
-      <span class="cheatsheet-helptext"><b>e.g. <span class="map-label-text-dialog-help-color">Carthage</span> or <span class="map-text-dialog-help-color">Mines of Moria</span></b></span>
-      <button type="button" name="map-label-text-dialog-save" data-action="map-label-text-dialog-save" class="button cheatsheet-button map-label-text-dialog-save">Save</button>
+    <div class="color-picker-create-legend">
+      <div class="colors-container">
+        <ul class="colors-list"></ul>
+        <div class="color-picker-container">
+          <div class="color-picker-spectrum"></div>
+          <div class="color-picker-input">
+            <input type="text"  data-model="hex" data-dimension="*" class="textfield  uppercase" value="#000000" />
+          </div>
+          <div class="color-picker-slider">
+            <span>H</span>
+            <input type="range" data-model="hsv" data-dimension="h" value="0" min="0" max="359" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="h" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>S</span>
+            <input type="range" data-model="hsv" data-dimension="s" value="0" min="0" max="100" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="s" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>V</span>
+            <input type="range" data-model="hsv" data-dimension="v" value="0" min="0" max="100" tabindex="-1"/>
+            <input type="text"  data-model="hsv" data-dimension="v" class="textfield" value="0" />
+          </div>
+          <br/>
+          <div class="color-picker-slider">
+            <span>R</span>
+            <input type="range" data-model="rgb" data-dimension="r" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="r" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>G</span>
+            <input type="range" data-model="rgb" data-dimension="g" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="g" class="textfield" value="0" />
+          </div>
+          <div class="color-picker-slider">
+            <span>B</span>
+            <input type="range" data-model="rgb" data-dimension="b" value="0" min="0" max="255" tabindex="-1"/>
+            <input type="text"  data-model="rgb" data-dimension="b" class="textfield" value="0" />
+          </div>
+          <div class="color-preview"></div>
+        </div>
+      </div>
+      <div class="create-map-label-actions">
+        <button type="button" name="create-map-label-color-cancel" data-action="cancel" class="button create-map-label-color-cancel">Back</button>
+        <button type="button" name="create-map-label-color-choose" data-action="choose" class="button create-map-label-color-choose">Choose Color</button>
+      </div>
     </div>
+  </div>
+</script>
+
+<script type="text/template" id="create-label-new-color-template">
+  <div class="create-map-label-section form-section">
+    <li class="create-palette-new-color">+</li>
+    <input type="text" class="textfield create-map-label-name-input" name="legend-name" placeholder="Place name e.g. Carthage"/>
+    <div class="map-label-text-location-info">Location:
+      <span class="map-text-location-data"></span>
+      <button type="button" name="map-label-text-location-set" data-action="location-set" class="button map-label-text-location-set">Set Location</button>
+    </div>
+  </div>
+  <div class="create-map-label-second-section form-section">
+    <!-- <form action="" class="map-label-frame-form"> -->
+    <div class="create-map-label-frame-section">
+      <input class="label-all-show-frames" type="radio" name="frames-{{uuid}}" value="all-frames" checked="checked"> Show on all frames<br>
+      <input class="label-some-show-frames" type="radio" name="frames-{{uuid}}" value="some-frames"> Show on specific frames:<br>
+      <div class="map-label-frame-select-container">
+        <input type="number" class="map-label-frame-input map-label-frame-input-start" placeholder=0 >
+        to
+        <input type="number" class="map-label-frame-input map-label-frame-input-end" placeholder=0 >
+      </div>
+    </div>
+    <button type="button" name="create-map-label-remove-label" data-action="remove" class="button create-map-label-remove-label">Remove</button>
+  </div>'
+</script>
+
+<script type="text/template" id="create-label-color-template">
+  <div class="create-map-label-section form-section">
+    <li
+      class="create-palette-color"
+      style="background:{{color}}"
+      data-palette-color="{{color}}">
+      <div class="create-palette-remove-color"></div>
+    </li>
+    <input type="text" class="textfield create-map-label-name-input" name="legend-name" value="{{label}}"/>
+    <div class="map-label-text-location-info">Location:
+      <span class="map-text-location-data">{{location}}</span>
+      <button type="button" name="map-label-text-location-set" data-action="location-set" class="button map-label-text-location-set">Set Location</button>
+    </div>
+  </div>
+  <div class="create-map-label-second-section form-section">
+    <div class="create-map-label-frame-section">
+      <input class="label-all-show-frames" type="radio" name="frames-{{uuid}}" value="all-frames" checked="checked"> Show on all frames<br>
+      <input class="label-some-show-frames" type="radio" name="frames-{{uuid}}" value="some-frames"> Show on specific frames:<br>
+      <div class="map-label-frame-select-container">
+        <input type="number" class="map-label-frame-input map-label-frame-input-start" placeholder=0 >
+        to
+        <input type="number" class="map-label-frame-input map-label-frame-input-end" placeholder=0 >
+      </div>
+    </div>
+    <button type="button" name="create-map-label-remove-label" data-action="remove" class="button create-map-label-remove-label">Remove</button>
   </div>
 </script>

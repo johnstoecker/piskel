@@ -27,8 +27,9 @@
       frames : this.piskelController.getFrameCount(),
       events: piskel.getEvents(),
       legend: piskel.legend,
-      first_frame_as_png : pskl.app.getFirstFrameAsPng(),
-      framesheet_as_png : pskl.app.getFramesheetAsPng()
+      labels: piskel.labels,
+      first_frame_as_png : pskl.app.getFirstFrameAsPng()
+      // framesheet_as_png : pskl.app.getFramesheetAsPng()
     };
 
     if (serialized.length > Constants.APPENGINE_SAVE_LIMIT) {
@@ -49,29 +50,44 @@
 
 
     // TODO: dont inline this function
-    //uploads the actual file to s3 using one-time URL
+    //uploads the actual gif file to s3 using one-time URL
     var uploadFileToS3 = function (result) {
       piskel.mapId = result.MapId;
       console.log('Response received from API: ', result);
       // TODO: make this link to the new map
       console.log('Map created at '+result.MapId)
 
-
-      this.renderAsImageDataAnimatedGIF(1, 1, function(imageData) {
-        pskl.utils.BlobUtils.dataToBlob(imageData, 'image/gif', function(blob) {
-          $.ajax({
+      var gifUploader = function() {
+        this.renderAsImageDataAnimatedGIF(1, 1, function(imageData) {
+          pskl.utils.BlobUtils.dataToBlob(imageData, 'image/gif', function(blob) {
+            $.ajax({
               type: 'PUT',
               url: result.url,
               processData: false,
               data: blob,
               success: successCallback,
               error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                  console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
-                  console.error('Response: ', jqXHR.responseText);
-                  console.error('An error occured when uploading your map file:\n' + jqXHR.responseText);
+                console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+                console.error('Response: ', jqXHR.responseText);
+                console.error('An error occured when uploading your map file:\n' + jqXHR.responseText);
               }
-          });
+            });
+          })
+        });
+      }.bind(this);
 
+      pskl.utils.BlobUtils.dataToBlob(data.first_frame_as_png, 'image/png', function(blob) {
+        $.ajax({
+          type: 'PUT',
+          url: result.thumbUrl,
+          processData: false,
+          data: blob,
+          success: gifUploader,
+          error: function ajaxError(jqXHR, textStatus, errorThrown) {
+              console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+              console.error('Response: ', jqXHR.responseText);
+              console.error('An error occured when uploading your map file:\n' + jqXHR.responseText);
+          }
         })
       });
 
@@ -88,9 +104,13 @@
     //   framesheet_as_png : pskl.app.getFramesheetAsPng()
     // };
 
+    var saveUrl = _config.api.invokeUrl + '/maps';
+    if (piskel.mapId) {
+      saveUrl += ("/" + piskel.mapId);
+    }
     $.ajax({
-      type: 'POST',
-      url: _config.api.invokeUrl + '/maps',
+      type: "POST",
+      url: saveUrl,
       headers: {
           Authorization: pskl.app.authToken
       },
@@ -99,6 +119,7 @@
         Description: descriptor.description,
         Events: data.events,
         Legend: data.legend || {},
+        Labels: data.labels || {},
         isPublic: true
       }),
       contentType: 'application/json',

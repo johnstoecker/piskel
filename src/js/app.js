@@ -217,7 +217,7 @@
     },
 
     loadMapImage_ : function (mapData) {
-      var requestUrl = "https://s3-us-west-2.amazonaws.com/map-content-images/" + mapData.imageURL
+      var requestUrl = "https://s3-us-west-2.amazonaws.com/map-content-images/" + mapData.imageURL + "?timestamp=xxx"
 
       var image = new Image();
       image.onload = function () {
@@ -237,6 +237,7 @@
             piskel.setDescriptor(descriptor);
             piskel.setLegend(mapData.Legend);
             piskel.setEvents(mapData.Events);
+            piskel.setLabels(mapData.Labels);
             piskel.mapId = mapData.MapId;
             pskl.app.piskelController.setPiskel(piskel);
             $.publish(Events.PISKEL_SAVED);
@@ -244,6 +245,7 @@
         );
 
       }.bind(this);
+      image.crossOrigin = "Anonymous";
       image.src = requestUrl;
     },
 
@@ -255,6 +257,9 @@
           // TODO: edit private maps
           // headers: {
           //     Authorization: authToken
+          // },
+          // headers: {
+            // Vary: 'Origin'
           // },
           success: callback,
           error: function ajaxError(jqXHR, textStatus, errorThrown) {

@@ -24,7 +24,6 @@
         location: 'BOTTOMLEFT',
         entries: [
           { label: "Gondor", color: "#FF0000", uuid: "asdskk"},
-          { label: "Rohan", color: "#00FF00", uuid: "lasdlkgjs"}
         ]
       }
     }
@@ -78,6 +77,12 @@
     var divId = 'entry-' + uuid;
 
     // newEntryDiv.innerHTML = '<div class="create-legend-section form-section"><li class="create-palette-new-color">+</li><input type="text" class="textfield create-legend-name-input" name="legend-name" placeholder="Kingdom of Gondor"/><button type="button" name="create-legend-remove-label" data-action="remove" class="button create-legend-remove-label">Remove</button></div>';
+
+    this.legend.entries.push({
+      uuid: uuid,
+      color: null,
+      label: null
+    })
 
     var tpl = pskl.utils.Template.get('create-legend-new-color-template');
     newEntryDiv.innerHTML = tpl
@@ -155,10 +160,10 @@
     for (var i in this.legend.entries) {
       if (this.legend.entries[i].uuid == uuid) {
         indexToRemove = i
-        return;
+        break;
       }
     }
-    this.legend.entries = this.legend.entries.splice(indexToRemove, 1)
+    this.legend.entries.splice(indexToRemove, 1)
     console.log('remove label clicked');
   }
 
@@ -213,6 +218,7 @@
   };
 
   ns.CreateLegendController.prototype.saveLegend_ = function () {
+    console.log(this.legend.entries)
     for (var i in this.legend.entries) {
       entry = this.legend.entries[i]
       var entryDiv = document.querySelector("#entry-"+entry.uuid);

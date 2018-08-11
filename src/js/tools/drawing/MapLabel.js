@@ -42,6 +42,9 @@
 
 
   ns.MapLabel.prototype.draw = function (color, col, row, frame, overlay) {
-    frame.setCurrentMapLabelLocation([col, row])
+    if (pskl.app.corePiskelController.piskel.currentLabelUUID) {
+      $.publish(Events.CHOOSE_LABEL_LOCATION, [col, row]);
+    }
+    // frame.setCurrentMapLabelLocation([col, row])
   };
 })();

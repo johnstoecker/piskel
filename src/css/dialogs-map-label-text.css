@@ -1,48 +1,70 @@
 #dialog-container.map-label-text {
   width: 500px;
-  height: 300px;
-  top : 30%;
+  height: 600px;
+  top : 50%;
   left : 50%;
   position : absolute;
   margin-left: -250px;
 }
 
-.map-label-text-dialog-wrapper {
+.show #dialog-container.map-label-text {
+  margin-top: -300px;
+}
+
+.create-map-label-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.map-label-text-dialog-head {
-  flex: 0 0 auto;
-  background-color: #ffd700;
-
+.legend-location-anchor-container {
+  display: flex;
+  align-items: center;
 }
 
-.map-label-text-editable-container {
-  flex: 1 0 auto;
-  /* height: 100vh;
-  width: 100vh; */
-  /* height: 100%;
-  width: 100%; */
-  font-size: 20px;
-}
-
-.map-labels-container {
-  flex: 1 0 auto;
-}
-
-.map-label-full-container {
+.legend-anchor-container {
   margin: 10px;
 }
 
-.map-label-top-container {
+.create-map-label-section {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.create-map-label-second-section {
+  margin: 10px;
   display: flex;
 }
 
+.create-map-label-remove-label {
+  margin-left: 50px;
+}
+/* .map-label-frame-select-container {
+  display: none;
+} */
+
+.map-label-frame-input {
+  width: 35px;
+}
+
+.label-all-show-frames:checked ~ .map-label-frame-select-container {
+  display: none;
+}
+
+.create-map-label-name-input {
+  margin: 10px;
+}
+
 .map-label-text-location-info {
-  flex: 1 0 auto;
+  flex: 1 0 225px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.map-label-frame-form {
+  margin: 10px;
 }
 
 .map-label-event-actions {

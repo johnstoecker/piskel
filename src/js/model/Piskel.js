@@ -11,6 +11,8 @@
   ns.Piskel = function (width, height, fps, descriptor) {
     if (width && height && descriptor) {
       this.layers = [];
+      this.labels = null;
+      this.currentLabelUUID = null;
       this.legend = null;
       this.width = width;
       this.height = height;
@@ -106,6 +108,10 @@
 
   ns.Piskel.prototype.setLegend = function (legend) {
     this.legend = legend;
+  }
+
+  ns.Piskel.prototype.setLabels = function (labels) {
+    this.labels = labels;
   }
 
   ns.Piskel.prototype.addLayerAt = function (layer, index) {

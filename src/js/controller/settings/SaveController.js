@@ -83,7 +83,8 @@
     this.descriptionInput.value = descriptor.description;
     this.nameInput.value = descriptor.name;
     if (descriptor.isPublic) {
-      this.isPublicCheckbox.setAttribute('checked', true);
+      // TODO: allow private maps
+      // this.isPublicCheckbox.setAttribute('checked', true);
     }
 
     if (!pskl.app.isLoggedIn()) {
